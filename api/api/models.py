@@ -2,10 +2,9 @@ from . import db
 import sys
 
 categories = {
-    "astronomy":1,
-    "cycling":2,
-    "guitarist":4,
-    "otaku":8
+    'anime': 1,
+    'books': 2,
+    'cycling': 3
 }
 
 
@@ -18,10 +17,9 @@ class User(db.Model):
 
     age = db.Column(db.Integer)
     gender = db.Column(db.String(16))
-    profile_picture = db.Column(
-        db.String(20), nullable=False, default='default.jpg')
     about = db.Column(db.Text)
     interests = db.Column(db.Integer)
+    location = db.Column(db.String(128))
 
     def __repr__(self):
         return f'User {self.username}'

@@ -11,8 +11,8 @@ const Calendar = (param1) => {
       y: 0,
     },
     animate: {
-      x: xOffset * Math.random() * 500 + 1,
-      y: yOffset * Math.random() * 500 + 1,
+      x: 0,
+      y: 0,
     },
   };
 
@@ -25,7 +25,17 @@ const Calendar = (param1) => {
 
   return (
     <motion.div exit={{ x: 1000 }} className="home">
-      <div className="root-user">Hello</div>
+      <div
+        style={{
+          borderRadius: "50%",
+          width: "200px",
+          height: "200px",
+          backgroundColor: "#cccccc",
+        }}
+        className="root-user"
+      >
+        Hello
+      </div>
 
       <motion.div
         variants={offsetVariants}

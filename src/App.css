@@ -67,5 +67,12 @@ a {
   width: 100vw;
   height: 92vh;
   display: grid;
-  place-items: center;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+}
+
+.root-user {
+  grid-area: 2 / 4 / 5 / 6;
+  justify-self: center;
+  align-self: center;
 }

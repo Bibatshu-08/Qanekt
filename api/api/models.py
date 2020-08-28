@@ -1,4 +1,5 @@
 from . import db
+import sys
 
 categories = {
     'anime': 1,

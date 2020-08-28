@@ -3,21 +3,30 @@ import { motion } from "framer-motion";
 import "../Landingpage.css";
 import { Link } from "react-router-dom";
 /* image imports */
-import tennis from "../tennis.png";
-import photography from "../photography.png";
+import tennis from "../styles/assets/tennis.png";
+import singer from "../styles/assets/singer.png";
+import photography from "../styles/assets/photography.png";
+import artist from "../styles/assets/artist.png";
+import scientist from "../styles/assets/scientist.png";
+import coder from "../styles/assets/coder.png";
 
 const interests = [
-  { id: 12, type: "Sports" },
-  { id: 124, type: "Science" },
-  { id: 122, type: "Art" },
-  { id: 121, type: "Movies" },
-  { id: 125, type: "Literature" },
+  { id: 1, type: "Singing", image: singer },
+  { id: 2, type: "Photography", image: photography },
+  { id: 3, type: "Art", image: artist },
+  { id: 4, type: "Science", image: scientist },
+  { id: 5, type: "Technology", image: coder },
 ];
 
 const LandingHome = () => {
   return (
     <>
-      <motion.main exit={{ x: 1000 }} className="main">
+      <motion.main
+        initial={{ x: -1000 }}
+        animate={{ x: 0 }}
+        exit={{ x: 1500 }}
+        className="main"
+      >
         <section className="hero">
           <div className="hero-text-wrapper">
             <h1 className="hero-text">Meet people based on your interests</h1>
@@ -53,7 +62,11 @@ const LandingHome = () => {
           {interests.map((interest, index) => (
             <div key={interest.id} className={`mosaic mosaic${index + 1}`}>
               <div className="image-wrapper">
-                <img className="image" src={photography} alt="tennis player" />
+                <img
+                  className="image"
+                  src={interest.image}
+                  alt="tennis player"
+                />
               </div>
               <h1 className="interest-title">{interest.type}</h1>
             </div>

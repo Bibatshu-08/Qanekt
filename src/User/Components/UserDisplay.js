@@ -6,15 +6,17 @@ const UserDisplay = ({ user, index, xOffset, yOffset }) => {
 
   const offsetVariants = {
     initial: {
-      x: 1000,
       // y: 0,
+      borderRadius: "50%",
     },
     animate1: {
       x: xOffset,
       // y: yOffset,
     },
     animate: {
-      x: 0,
+      borderRadius: isOpen ? "10px" : "50%",
+      width: isOpen ? "400px" : "200px",
+      height: "200px",
     },
     animate2: {
       x: xOffset * Math.random() - 0.5 * 250,
@@ -44,12 +46,13 @@ const UserDisplay = ({ user, index, xOffset, yOffset }) => {
       key={user.id}
       // variants={offsetVariants}
       // initial="initial"
-      // animate={`animate`}
-      initial={{ borderRadius: "50%" }}
+      // animate="animate"
+      initial={{ borderRadius: "50%", x: xOffset }}
       animate={{
         borderRadius: isOpen ? "10px" : "50%",
         width: isOpen ? "400px" : "200px",
         height: "200px",
+        x: xOffset * (Math.random() - 0.5) * 100,
       }}
       style={{
         width: "180px",

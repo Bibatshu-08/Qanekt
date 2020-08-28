@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
+import { motion } from "framer-motion";
 import UserDisplay from "./UserDisplay";
 
 const Home = ({ setShowModal }) => {
@@ -15,7 +15,7 @@ const Home = ({ setShowModal }) => {
     },
     { id: 123645, username: "Anonymous", age: 23, bio: "doawfwefne telling" },
   ]);
-  const [xOffset, setXOffset] = useState(0);
+  const [xOffset, setXOffset] = useState(Math.random() + 1);
   const [yOffset, setYOffset] = useState(0);
 
   const handleMoreUsers = () => {
@@ -24,7 +24,6 @@ const Home = ({ setShowModal }) => {
     setUsers([]);
     console.log("hello");
     setTimeout(() => {
-      setShowModal(false);
       setUsers([
         { id: 123, username: "Anonymous", age: 200, bio: "done telling" },
         { id: 1233, username: "Anonymous", age: 100, bio: "doasdfsding" },
@@ -47,11 +46,19 @@ const Home = ({ setShowModal }) => {
           bio: "doawfwefne telling",
         },
       ]);
-    }, 2000);
+    }, 1000);
+    setTimeout(() => {
+      setShowModal(false);
+    }, 1500);
   };
 
   return (
-    <motion.div exit={{ x: 1000 }} className="home">
+    <motion.div
+      initial={{ x: -1000 }}
+      animate={{ x: 0 }}
+      exit={{ x: 1500 }}
+      className="home"
+    >
       <motion.div
         style={{
           borderRadius: "50%",

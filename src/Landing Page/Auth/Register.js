@@ -45,7 +45,12 @@ const Register = () => {
   };
 
   return (
-    <motion.div exit={{ x: 1000 }} className="register auth">
+    <motion.div
+      initial={{ x: -1000 }}
+      animate={{ x: 0 }}
+      exit={{ x: 1500 }}
+      className="register auth"
+    >
       <form className="auth-form" onSubmit={handleSubmit}>
         <div className="username-input-container input-container">
           <label htmlFor="username">

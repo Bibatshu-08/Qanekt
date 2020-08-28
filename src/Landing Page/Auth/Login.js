@@ -63,7 +63,12 @@ const Login = ({
   }, [isLoggedIn, location.pathname]);
 
   return (
-    <motion.div exit={{ x: 1000 }} className="login auth">
+    <motion.div
+      initial={{ x: -1000 }}
+      animate={{ x: 0 }}
+      exit={{ x: 1500 }}
+      className="login auth"
+    >
       <form autoComplete="off" className="auth-form" onSubmit={handleSubmit}>
         {error.others?.length !== 0 && (
           <h1 className="error-message">{error.others?.message}</h1>

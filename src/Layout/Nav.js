@@ -25,7 +25,7 @@ const Nav = ({ setIsLoggedIn, isLoggedIn }) => {
               <Link to="/about">
                 <li className="nav-link">About Us</li>
               </Link>
-              <li className="nav-link" onClick={handleLogOut}>
+              <li className="nav-link logout" onClick={handleLogOut}>
                 Logout
               </li>
             </>
@@ -42,7 +42,9 @@ const Nav = ({ setIsLoggedIn, isLoggedIn }) => {
               </Link>
             </>
           )}
-          {isLoggedIn && <div className="profile-picture"></div>}
+          <Link to="/profile">
+            {isLoggedIn && <div className="profile-picture"></div>}
+          </Link>
         </div>
       </nav>
     </header>

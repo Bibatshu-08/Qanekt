@@ -9,7 +9,6 @@ from .. import db
 from ..models import User
 from . import auth
 
-
 def token_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):

@@ -54,7 +54,7 @@ def transform_data(data_combine, data_plot):
     tfidf_matrix = tfidf.fit_transform(data_plot['interests'])
 
     combine_sparse = sp.hstack([count_matrix, tfidf_matrix], format='csr')
-    cosine_sim = cosine_similarity(combine_sparse, combine_sparse)       # create a matrix representing the similarity between current_user and other_users
+    cosine_sim = cosine_similarity(combine_sparse, combine_sparse)
     return cosine_sim
 
 

@@ -1,0 +1,76 @@
+
+.profile{
+    width: 100%;
+    margin-top: 15vh;
+}
+.profile h1{
+    margin: 10vh auto;
+    text-align: center  ;    
+}
+
+
+.formbox{
+    width: 90%;
+    display: grid;
+    grid-template-rows: 20% 40% 40%;
+    min-height: 80vh;
+    margin: auto;
+}
+
+
+.layer-one{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.layer-one div{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.name{
+    flex: 1 1 300px;
+}
+.age, .gender{
+    flex: 0.5 1 150px;
+}
+.name form, .age form, .gender form{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.layer-one input[type=text], .layer-one select{
+    padding: 10px;
+    margin-left: 5%;
+    width: 75%;
+    border-radius: 10px;
+    outline: none;
+    border: 2px solid black;
+}
+
+
+.layer-two{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+.layer-two h3{
+    margin-bottom: 5vh;
+}
+
+
+.layer-three textarea{
+    margin-top: 5vh;
+    width: 100%;
+    height: 90%;
+    padding: 12px 20px;
+}
+
+
+.submit-button{
+    margin: 10vh auto;
+    width: 10%;
+    height: 7vh;
+}

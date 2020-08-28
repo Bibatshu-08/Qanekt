@@ -25,6 +25,7 @@ def get_data():
         'gender': user.gender,
         'about': str(list(map(str,user.about.split()))),
         'interests': str(list(map(str,user.list_interests()))),
+        'location': user.location,
     }for user in users]
 
     df = pd.DataFrame.from_dict(pd.json_normalize(df), orient='columns')
@@ -39,7 +40,7 @@ def distance(user1, user2):
 
 
 def combine_data(data):         # remove other details and combine information about the individuals
-    user_recommend = data.drop(columns=['id','username','email','password','age','gender'])
+    user_recommend = data.drop(columns=['id','username','email','password','age','gender','location'])
     user_recommend['combine'] = user_recommend[user_recommend.columns[0:2]].apply(lambda x: ','.join(x.dropna().astype(str)),axis=1)
     user_recommend = user_recommend.drop(columns=[ 'about','interests'])
     return user_recommend
@@ -106,8 +107,8 @@ def results(user_id):
 
 
 @auth.route('/recommend', methods=['GET'])
-def recommend_user():
-    res = results(request.args.get('username'))
+def recommend_user(current_user):
+    res = results(current_user)
     return jsonify(res)
     
 

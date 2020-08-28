@@ -21,12 +21,17 @@ a {
   color: black;
 }
 
+button {
+  cursor: pointer;
+}
+
 .header {
   max-width: 80vw;
   margin: 0 auto;
   min-height: 8vh;
   display: flex;
   align-items: center;
+  padding-top: 20px;
 }
 
 .nav {

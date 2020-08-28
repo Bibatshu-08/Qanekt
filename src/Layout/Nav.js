@@ -38,7 +38,7 @@ const Nav = ({ setIsLoggedIn, isLoggedIn }) => {
                 <li className="nav-link">Login</li>
               </Link>
               <Link to="/register">
-                <li className="nav-link">Sign Up</li>
+                <li className="nav-link register">Sign Up</li>
               </Link>
             </>
           )}

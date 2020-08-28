@@ -1,7 +1,9 @@
 from . import db
 
 categories = {
-
+    'anime': 1,
+    'books': 2,
+    'cycling': 3
 }
 
 
@@ -14,13 +16,12 @@ class User(db.Model):
 
     age = db.Column(db.Integer)
     gender = db.Column(db.String(16))
-    profile_picture = db.Column(
-        db.String(20), nullable=False, default='default.jpg')
     about = db.Column(db.Text)
     interests = db.Column(db.Integer)
+    location = db.Column(db.String(128))
 
     def __repr__(self):
-        return f'User {self.name}'
+        return f'User {self.username}'
 
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
@@ -41,6 +42,6 @@ class User(db.Model):
     def list_interests(self):
         interest_list = list()
         for interest in categories:
-            if self.is_subscribed(interest):
+            if self.has_interest(interest):
                 interest_list.append(interest)
         return interest_list

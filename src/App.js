@@ -28,7 +28,7 @@ import Search from "./User/Components/Search";
 
 function App() {
   /* state variables */
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [searching, setSearching] = useState(false);
   const [token, setToken] = useState(null);
@@ -53,7 +53,7 @@ function App() {
         <SearchingAnimation searching={searching} />
         {isLoggedIn ? (
           <main className="container">
-            <Nav setIsLoggedIn={setIsLoggedIn} />
+            <Nav setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />
             <Route
               render={({ location }) => (
                 <AnimatePresence
@@ -66,7 +66,12 @@ function App() {
                     <Route
                       path="/"
                       exact
-                      render={(props) => <Home setSearching={setSearching} />}
+                      render={(props) => (
+                        <Home
+                          setSearching={setSearching}
+                          setShowModal={setShowModal}
+                        />
+                      )}
                     />
 
                     <Route path="/about" render={(props) => <About />} />
@@ -106,7 +111,7 @@ function App() {
                         />
                       )}
                     />
-                    <Route path="/aboutus" render={(props) => <About />} />
+                    <Route path="/about" render={(props) => <About />} />
                     <Route path="/register" render={(props) => <Register />} />
                     <Redirect to="/" />
                   </Switch>

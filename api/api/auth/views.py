@@ -15,7 +15,13 @@ def register():
     hashed_password = generate_password_hash(data['password'], method='sha256')
     username = data['username']
     email = data['email']
-    user = User(username=username, email=email, password=hashed_password)
+    # user = User(username=username, email=email, password=hashed_password)     # Previous version control
+
+    age = data['age']
+    gender = data['gender']
+    about = data['about']
+    interest = data['interests']
+    user = User(username=username, email=email, password=hashed_password, age=age, gender=gender, about=about, interests = interest)
 
     if User.query.filter_by(username=username).first():
         response = jsonify({'message': 'user exists', 'location': 'username'})

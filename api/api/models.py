@@ -1,7 +1,11 @@
 from . import db
+import sys
 
 categories = {
-
+    "astronomy":1,
+    "cycling":2,
+    "guitarist":4,
+    "otaku":8
 }
 
 
@@ -20,7 +24,7 @@ class User(db.Model):
     interests = db.Column(db.Integer)
 
     def __repr__(self):
-        return f'User {self.name}'
+        return f'User {self.username}'
 
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
@@ -41,6 +45,6 @@ class User(db.Model):
     def list_interests(self):
         interest_list = list()
         for interest in categories:
-            if self.is_subscribed(interest):
+            if self.has_interest(interest):
                 interest_list.append(interest)
         return interest_list

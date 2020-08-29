@@ -4,7 +4,6 @@ import "../styles/landing.css";
 import { Link } from "react-router-dom";
 /* image imports */
 import connect from "../styles/assets/connect.png";
-import tennis from "../styles/assets/tennis.png";
 import singer from "../styles/assets/singer.png";
 import photography from "../styles/assets/photography.png";
 import artist from "../styles/assets/artist.png";
@@ -93,7 +92,10 @@ const LandingHome = () => {
             <li className="social-link">Instagram</li>
           </div>
           <div className="website-links">
-            <h1 className="website-link">Website Links</h1>
+            <h1 className="website-link-title">Website Links</h1>
+            <li className="website-link">Facebook</li>
+            <li className="website-link">Twitter</li>
+            <li className="website-link">Instagram</li>
           </div>
         </footer>
       </motion.main>

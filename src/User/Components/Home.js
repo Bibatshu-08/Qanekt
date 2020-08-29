@@ -83,7 +83,7 @@ const Home = ({ setShowModal, token }) => {
         const options = {
           headers: {
             "content-type": "application/json",
-            "x-access-token": authToken,
+            Autorization: `Bearer ${authToken}`,
           },
         };
         console.log(options);
@@ -100,7 +100,7 @@ const Home = ({ setShowModal, token }) => {
         const options = {
           headers: {
             "content-type": "application/json",
-            "x-access-token": authToken,
+            "x-access-token": JSON.stringify(authToken),
           },
         };
         console.log(options);

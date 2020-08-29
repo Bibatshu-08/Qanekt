@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const LandingNav = () => {
   return (
-    <motion.header exit={{ x: 1000 }} className="header-landing">
+    <motion.header exit={{ x: "100vw" }} className="header-landing">
       <nav className="nav-landing">
         <div className="logo">
           <Link to="/">

@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import './about.css'
 import collab from './collab.svg';
-import team from './team.svg';
+import team from '../styles/assets/whoarewe.svg';
 
 export default function About(){
   return(
@@ -31,7 +31,7 @@ export default function About(){
         <img src={team} className="team" />
       </div>
       <div className="text">
-      <h1>Who Are We?</h1>
+      <h1>Who We Are</h1>
         <p>We are a group of young and ambitious tech enthusiasts driven to bring changes in the society through technology. It’s our cohesive belief that the problems we, or our previous generations faced, can be solved today by leveraging on the modern advancement of technology, which was the root behind the incentive. All four of us have felt somewhere in life that we could not explore more, innovate more, and collaborate more despite having constant curiosities and ideas bubbling in our heads. Now, although we cannot go back to the past and change it, we want to secure at least a platform that might help humanity to innovate more in the coming days. Yes, we are just passing by youngsters diverse in every aspect yet driven by the common goal to create an innovative and prosperous future.</p>
       </div>
     </div>

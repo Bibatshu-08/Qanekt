@@ -74,12 +74,13 @@ def login():
     authentication = request.get_json()
 
     if not authentication or not authentication['email'] or not authentication['password']:
-        return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm="Login required!"', 'status':'error', 'location' : 'others'})
+        return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm="Login required!"', 'status': 'error', 'location': 'others'})
 
     user = User.query.filter_by(email=authentication['email']).first()
 
     if not user:
-        response = jsonify({'status':'error', 'error': {'message':'email not found', 'location' : 'email',}})
+        response = jsonify({'status': 'error', 'error': {
+                           'message': 'email not found', 'location': 'email', }})
         response.status_code = 401
         return response
 
@@ -87,9 +88,18 @@ def login():
         token = jwt.encode({'id': user.id, 'exp': datetime.datetime.utcnow(
         ) + datetime.timedelta(minutes=30)}, current_app.config['SECRET_KEY'])
 
-        return jsonify({'token': token.decode('UTF-8'), 'status': 'success'})
+        user_info = {
+            'id': user.id,
+            'username': user.username,
+            'email': user.email,
+            'age': user.age,
+            'gender': user.gender,
+            'about': user.about,
+            'interests': user.list_interests(),
+            'location': user.location,
+        }
+        return jsonify({'token': token.decode('UTF-8'), 'status': 'success', 'user': user_info})
     return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm="Login required!"'})
-
 
 @auth.route('/user/<user_id>', methods=['GET'])
 @token_required
@@ -156,7 +166,7 @@ def recommend_user(current_user):
     return jsonify(res)
 
 
-@auth.route('/clearDatabase')\
+@auth.route('/clearDatabase')
 def clear_database():
     try:
         for user in User.query.all():

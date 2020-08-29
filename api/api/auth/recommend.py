@@ -23,8 +23,8 @@ def get_data():
         'password': user.password,
         'age': user.age,
         'gender': user.gender,
-        'about': str(list(map(str,user.about.split()))),
-        'interests': str(list(map(str,user.list_interests()))),
+        'about': str(list(map(str, user.about.split()))),
+        'interests': str(list(map(str, user.list_interests()))),
         'location': user.location,
     }for user in users]
 
@@ -91,8 +91,8 @@ def recommend_hobbists(username, data, combine, transform, sliceIndex):
         recommendation_data['Username'] = user_name
         recommendation_data['Email'] = user_mail
         recommendation_data['Age'] = user_age
-        recommendation_data['Interests'] = eval(user_interests)
-        recommendation_data['About'] = eval(user_about)
+        recommendation_data['Interests'] = user_interests
+        recommendation_data['About'] = user_about
 
         return recommendation_data
 

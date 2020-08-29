@@ -28,7 +28,7 @@ import Search from "./User/Components/Search";
 
 function App() {
   /* state variables */
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [searching, setSearching] = useState(false);
   const [token, setToken] = useState(null);

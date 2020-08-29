@@ -3,43 +3,7 @@ import { motion } from "framer-motion";
 import UserDisplay from "./UserDisplay";
 
 const Home = ({ setShowModal, token }) => {
-  const [users, setUsers] = useState([
-    {
-      id: 1,
-      username: "Anonymous",
-      interests: ["sports", "music"],
-      age: 20,
-      bio: "done telling",
-    },
-    {
-      id: 2,
-      username: "Anonymous",
-      interests: ["sports", "science"],
-      age: 10,
-      bio: "doasdfsding",
-    },
-    {
-      id: 3,
-      username: "Anonymous",
-      interests: ["sports", "art", "sports", "art", "sports", "art"],
-      age: 20,
-      bio: "donawfe tawefwefelling",
-    },
-    {
-      id: 4,
-      username: "Anonymous",
-      age: 52,
-      interests: ["sports", "science"],
-      bio: "done tawdfwafeadfawfing",
-    },
-    {
-      id: 5,
-      username: "Anonymous",
-      interests: ["sports", "science"],
-      age: 23,
-      bio: "doawfwefne telling",
-    },
-  ]);
+  const [users, setUsers] = useState([]);
   const [xOffset, setXOffset] = useState(Math.random() + 1);
   const [page, setPage] = useState(1);
 
@@ -78,7 +42,7 @@ const Home = ({ setShowModal, token }) => {
 
   useEffect(() => {
     const authToken = localStorage.getItem("token");
-    async function getUserConnections() {
+    async function getUserRecommendations() {
       try {
         const options = {
           headers: {
@@ -88,11 +52,10 @@ const Home = ({ setShowModal, token }) => {
 
         if (authToken) options.headers["x-access-token"] = authToken;
 
-        console.log(options);
-        const response = await fetch("/api/connections", options);
-        console.log(response);
+        const response = await fetch("/api/recommend", options);
         const jsonResponse = await response.json();
         console.log(jsonResponse);
+        setUsers(jsonResponse);
       } catch (error) {
         console.log(error);
       }
@@ -108,17 +71,16 @@ const Home = ({ setShowModal, token }) => {
         if (authToken) options.headers["x-access-token"] = authToken;
 
         console.log(options);
-        const response = await fetch("/api/connections", options);
+        const response = await fetch("/api/user", options);
         console.log(response);
         const jsonResponse = await response.json();
-        console.log(jsonResponse);
       } catch (error) {
         console.log(error);
       }
     }
     getUserData();
-    getUserConnections();
-  });
+    getUserRecommendations();
+  }, []);
 
   return (
     <motion.div

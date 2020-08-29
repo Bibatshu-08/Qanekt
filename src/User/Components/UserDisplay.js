@@ -23,7 +23,7 @@ const UserDisplay = ({ user, index, xOffset, yOffset }) => {
     >
       <motion.h1 initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
         {isOpen && "Username: "}
-        {user.username}
+        {user.Username}
       </motion.h1>
       <AnimatePresence>
         {isOpen && (
@@ -33,28 +33,29 @@ const UserDisplay = ({ user, index, xOffset, yOffset }) => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              Age: {user.age}
+              Age: {user.Age}
             </motion.h1>
             <motion.span
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              email: {user.email}
+              email: {user.Email}
             </motion.span>
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              Tale: {user.bio}
+              Tale: {user.About}
+              {console.log(typeof user.About)}
             </motion.p>
             <motion.div className="interests">
-              {user.interests?.map((interest) => (
+              {/* {user.Interests?.map((interest) => (
                 <motion.div className="mini-interest">
                   <h3 className="interest-display-mini">{interest}</h3>{" "}
                 </motion.div>
-              ))}
+              ))} */}
             </motion.div>
           </>
         )}

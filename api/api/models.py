@@ -29,30 +29,15 @@ class User(db.Model):
             self.interests = "0"*len(categories)
 
 
-    # def has_interest(self, interest):
-    #     return self.interests & categories[interest] == categories[interest]
-
-
     def remove_interest(self, interest):
-        for i in interest:
-            if i in maskCategories:
-                self.interest = self.interest[:maskCategories[i]] + "0" + self.interest[maskCategories[i]+1:]
-        # if self.has_interest(interest):
-        #     self.interests -= categories[interest]
+        if interest in maskCategories:
+            self.interests = self.interests[:maskCategories[interest]] + "0" + self.interests[maskCategories[interest]+1:]
 
 
     def add_interest(self, interest):
-        for i in interest:
-            if i in maskCategories:
-                self.interest = self.interest[:maskCategories[i]] + "1" + self.interest[maskCategories[i]+1:]
-        # if not self.has_interest(interest):
-        #     self.interests += categories[interest]
+        if interest in maskCategories:
+            self.interests = self.interests[:maskCategories[interest]] + "1" + self.interests[maskCategories[interest]+1:]
 
 
     def list_interests(self):
         return [categories[n] for n,x in enumerate(self.interests) if x == "1"]
-        # interest_list = list()
-        # for interest in categories:
-        #     if self.has_interest(interest):
-        #         interest_list.append(interest)
-        # return interest_list

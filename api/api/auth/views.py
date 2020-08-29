@@ -8,6 +8,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from .. import db
 from ..models import User
 from . import auth
+from . import recommend
 
 def token_required(f):
     @wraps(f)
@@ -114,7 +115,7 @@ def editprofile(current_user):
     current_user.age = data['age']
     current_user.gender = data['gender']
     current_user.about = data['about']
-    current_user.location = data['about']
+    current_user.location = data['location']
     for interest in data['interests']:
         current_user.add_interest(interest)
     db.session.commit()
@@ -136,3 +137,34 @@ def getallusers():
         'about': user.about,
         'interests': user.list_interests(),
         'location': user.location} for user in users])
+
+
+
+@auth.route('/resetDatabase')
+def reset_database():
+
+    db.drop_all()
+    db.create_all()
+    return "Database has been reset"
+
+
+
+
+@auth.route('/recommend', methods=['GET'])
+@token_required
+def recommend_user(current_user):
+    res = recommend.results(current_user.username)
+    return jsonify(res)
+    
+
+@auth.route('/clearDatabase')
+def clear_database():
+    try:
+        for user in User.query.all():
+            db.session.delete(user)
+            db.session.commit()
+        
+        return "All userdata have been removed"
+    
+    except:
+        return "Database is already empty"

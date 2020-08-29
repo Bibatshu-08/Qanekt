@@ -104,22 +104,3 @@ def results(user_id):
         recommendations = recommend_hobbists(user_id, find_user, combine_result, transform_result)
         return recommendations.to_dict('records')
 
-
-
-@auth.route('/recommend', methods=['GET'])
-def recommend_user(current_user):
-    res = results(current_user)
-    return jsonify(res)
-    
-
-@auth.route('/clearDatabase')
-def clear_database():
-    try:
-        for user in User.query.all():
-            db.session.delete(user)
-            db.session.commit()
-        
-        return "All userdata have been removed"
-    
-    except:
-        return "Database is already empty"

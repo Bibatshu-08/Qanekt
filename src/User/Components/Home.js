@@ -83,11 +83,13 @@ const Home = ({ setShowModal, token }) => {
         const options = {
           headers: {
             "content-type": "application/json",
-            Autorization: `Bearer ${authToken}`,
           },
         };
+
+        if (authToken) options.headers["x-access-token"] = authToken;
+
         console.log(options);
-        const response = await fetch("/api/connections");
+        const response = await fetch("/api/connections", options);
         console.log(response);
         const jsonResponse = await response.json();
         console.log(jsonResponse);
@@ -100,11 +102,13 @@ const Home = ({ setShowModal, token }) => {
         const options = {
           headers: {
             "content-type": "application/json",
-            "x-access-token": JSON.stringify(authToken),
           },
         };
+
+        if (authToken) options.headers["x-access-token"] = authToken;
+
         console.log(options);
-        const response = await fetch("/api/connections");
+        const response = await fetch("/api/connections", options);
         console.log(response);
         const jsonResponse = await response.json();
         console.log(jsonResponse);

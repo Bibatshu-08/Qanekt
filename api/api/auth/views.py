@@ -203,7 +203,7 @@ def connections(current_user):
     
     page = request.args.get('page', 1, type=int)
     pagination = current_user.followed.paginate(
-        page, per_page=2, error_out=False)
+        page, per_page=5, error_out=False)
     follows = [item.followed for item in pagination.items]
     return jsonify([{
         'username': user.username,

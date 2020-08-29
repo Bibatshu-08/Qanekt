@@ -53,6 +53,7 @@ const Home = ({ setShowModal, token }) => {
         if (authToken) options.headers["x-access-token"] = authToken;
 
         const response = await fetch("/api/recommend", options);
+        console.log(response);
         const jsonResponse = await response.json();
         console.log(jsonResponse);
         setUsers(jsonResponse);
@@ -97,9 +98,7 @@ const Home = ({ setShowModal, token }) => {
           backgroundColor: "#000",
         }}
         className="root-user"
-      >
-        Hello
-      </motion.div>
+      ></motion.div>
       {/* <AnimateSharedLayout> */}
       <motion.div className="users" initial={{ borderRadius: 10 }}>
         {users.map((user, index) => (

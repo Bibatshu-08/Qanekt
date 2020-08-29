@@ -94,7 +94,7 @@ export default function Profile({ user }) {
               <h3>What is your unique story?</h3>
             </label>
             <textarea
-              value={interest}
+              value={about}
               name="story"
               id="story"
               required

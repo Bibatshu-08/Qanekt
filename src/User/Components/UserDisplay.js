@@ -39,24 +39,25 @@ const UserDisplay = ({ user, index, xOffset, yOffset }) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              style={{ fontSize: "25px" }}
             >
               email: {user.Email}
             </motion.span>
-            <motion.p
+            {/* <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
               Tale: {user.About}
               {console.log(typeof user.About)}
-            </motion.p>
-            <motion.div className="interests">
+            </motion.p> */}
+            {/* <motion.div className="interests">
               {/* {user.Interests?.map((interest) => (
                 <motion.div className="mini-interest">
                   <h3 className="interest-display-mini">{interest}</h3>{" "}
                 </motion.div>
               ))} */}
-            </motion.div>
+            {/* </motion.div> */}
           </>
         )}
       </AnimatePresence>

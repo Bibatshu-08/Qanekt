@@ -156,7 +156,7 @@ def recommend_user(current_user):
     return jsonify(res)
 
 
-@auth.route('/clearDatabase')\
+@auth.route('/clearDatabase')
 def clear_database():
     try:
         for user in User.query.all():

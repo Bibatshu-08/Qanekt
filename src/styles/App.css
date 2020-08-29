@@ -50,7 +50,7 @@ button {
   align-items: center;
 }
 
-.logo-container h3{
+.logo-container h3 {
   margin-left: 20px;
   color: #2f77a8;
   font-size: 145%;
@@ -207,6 +207,10 @@ button {
   font-weight: bold;
 }
 
-.logo{
+.logo {
   width: 70px;
+}
+
+.email {
+  font-size: 20px;
 }

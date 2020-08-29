@@ -214,6 +214,7 @@ def connections(current_user):
         page, per_page=5, error_out=False)
     follows = [item.followed for item in pagination.items]
     return jsonify([{
+        'id':user.id,
         'username': user.username,
         'email': user.email,
         'age': user.age,

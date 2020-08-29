@@ -14,7 +14,6 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 
 def get_data():
-
     users = User.query.all()
     df = [{
         'id': user.id,

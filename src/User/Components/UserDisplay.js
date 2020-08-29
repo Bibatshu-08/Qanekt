@@ -54,26 +54,44 @@ const UserDisplay = ({ user, index, xOffset, yOffset }) => {
         height: "200px",
         x: xOffset * (Math.random() - 0.5) * 100,
       }}
-      style={{
-        width: "180px",
-        height: "180px",
-        backgroundColor: "#cccccc",
-      }}
       className={`user-${index + 1} user`}
     >
       <motion.h1 initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        {isOpen && "Username: "}
         {user.username}
       </motion.h1>
       <AnimatePresence>
         {isOpen && (
-          <motion.h1
-            style={{ backgroundColor: "red" }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            {user.age}
-          </motion.h1>
+          <>
+            <motion.h1
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              Age: {user.age}
+            </motion.h1>
+            <motion.span
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              email: {user.email}
+            </motion.span>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              Tale: {user.bio}
+            </motion.p>
+            <motion.div className="interests">
+              {user.interests?.map((interest) => (
+                <motion.div className="mini-interest">
+                  <h3 className="interest-display-mini">{interest}</h3>{" "}
+                </motion.div>
+              ))}
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </motion.div>

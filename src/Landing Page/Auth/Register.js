@@ -24,10 +24,7 @@ const Register = () => {
       };
 
       try {
-        const response = await fetch(
-          "http://localhost:4000/api/auth/register",
-          options
-        );
+        const response = await fetch("api/register", options);
         console.log(response);
         if (response.ok) {
           const jsonResponse = await response.json();
@@ -46,9 +43,9 @@ const Register = () => {
 
   return (
     <motion.div
-      initial={{ x: -1000 }}
+      initial={{ x: "-100vw" }}
       animate={{ x: 0 }}
-      exit={{ x: 1500 }}
+      exit={{ x: "100vw" }}
       className="register auth"
     >
       <form className="auth-form" onSubmit={handleSubmit}>

@@ -7,7 +7,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import "./App.css";
+import "./styles/App.css";
 
 /* Layout imports */
 import Nav from "./Layout/Nav";
@@ -24,11 +24,11 @@ import LandingHome from "./Landing Page/LandingHome";
 /* User imports */
 import Home from "./User/Components/Home";
 import Profile from "./User/Components/Profile";
-import Search from "./User/Components/Search";
+import Location from "./User/Components/Location";
 
 function App() {
   /* state variables */
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [searching, setSearching] = useState(false);
   const [token, setToken] = useState(null);
@@ -41,7 +41,8 @@ function App() {
     const temp = JSON.parse(localStorage.getItem("isLoggedIn"));
     console.log(temp);
     if (temp) {
-      setIsLoggedIn(temp);
+      console.log("firebase");
+      setIsLoggedIn(true);
     }
   }, []);
 
@@ -52,7 +53,7 @@ function App() {
         <Modal showModal={showModal} />
         <SearchingAnimation searching={searching} />
         {isLoggedIn ? (
-          <main className="container">
+          <main className="container" key="user">
             <Nav setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />
             <Route
               render={({ location }) => (
@@ -76,6 +77,7 @@ function App() {
 
                     <Route path="/about" render={(props) => <About />} />
                     <Route path="/profile" render={(props) => <Profile />} />
+                    <Route path="/location" render={(props) => <Location />} />
 
                     <Redirect to="/" />
                   </Switch>
@@ -84,7 +86,7 @@ function App() {
             />
           </main>
         ) : (
-          <main className="landing-container">
+          <main className="landing-container" key="landingpage">
             <Nav />
             <Route
               render={({ location }) => (

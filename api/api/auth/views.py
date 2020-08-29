@@ -10,6 +10,7 @@ from ..models import User
 from . import auth
 from . import recommend
 
+
 def token_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -36,9 +37,9 @@ def register():
     hashed_password = generate_password_hash(data['password'], method='sha256')
     username = data['username']
     email = data['email']
-    user = User(username=username, email=email, password=hashed_password)  
-    
-    # Crypti's test 
+    user = User(username=username, email=email, password=hashed_password)
+
+    # Crypti's test
     # age = data['age']
     # gender = data['gender']
     # about = data['about']
@@ -98,7 +99,6 @@ def getuser(current_user, user_id):
             'id': user.id,
             'username': user.username,
             'email': user.email,
-            'password': user.password,
             'age': user.age,
             'gender': user.gender,
             'about': user.about,
@@ -139,7 +139,6 @@ def getallusers():
         'location': user.location} for user in users])
 
 
-
 @auth.route('/resetDatabase')
 def reset_database():
 
@@ -148,14 +147,12 @@ def reset_database():
     return "Database has been reset"
 
 
-
-
 @auth.route('/recommend', methods=['GET'])
 @token_required
 def recommend_user(current_user):
     res = recommend.results(current_user.username)
     return jsonify(res)
-    
+
 
 @auth.route('/clearDatabase')
 def clear_database():
@@ -163,8 +160,54 @@ def clear_database():
         for user in User.query.all():
             db.session.delete(user)
             db.session.commit()
-        
+
         return "All userdata have been removed"
-    
+
     except:
         return "Database is already empty"
+
+
+@auth.route('/connect/<id>')
+@token_required
+def connect(current_user, id):
+    user = User.query.filter_by(id=id).first()
+    if user is None:
+        return {'message': 'user not found'}, 401
+    if current_user.is_following(user):
+        return {'message': 'already connected to user'}
+    current_user.follow(user)
+    db.session.commit()
+    return {'message': f'Connected to user {user.username}'}
+
+
+@auth.route('/disconnect/<id>')
+@token_required
+def disconnect(current_user, id):
+    user = User.query.filter_by(id=id).first()
+    if user is None:
+        return {'message': 'user not found'}, 401
+    if not current_user.is_following(user):
+        return {'message': 'user not followed to begin with'}
+    current_user.unfollow(user)
+    db.session.commit()
+    return {'message': f'Disconnected from user {user.username}'}
+
+
+@auth.route('/connections')
+@token_required
+def connections(current_user):
+    if current_user is None:
+        return {'message': 'invalid user'}
+    
+    page = request.args.get('page', 1, type=int)
+    pagination = current_user.followed.paginate(
+        page, per_page=2, error_out=False)
+    follows = [item.followed for item in pagination.items]
+    return jsonify([{
+        'username': user.username,
+        'email': user.email,
+        'age': user.age,
+        'gender': user.gender,
+        'interests': user.interests,
+        'location': user.location,
+    } for user in follows])

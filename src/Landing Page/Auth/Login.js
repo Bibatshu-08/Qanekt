@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { Redirect } from "react-router";
 
 const Login = ({
   isLoggedIn,
@@ -29,10 +30,7 @@ const Login = ({
         body: JSON.stringify(userCredentials),
       };
 
-      const response = await fetch(
-        "http://localhost:4000/api/auth/login",
-        options
-      );
+      const response = await fetch("/api/login", options);
       console.log(response);
       const jsonResponse = await response.json();
       console.log(jsonResponse);
@@ -49,24 +47,21 @@ const Login = ({
         }, 4000);
       } else if (jsonResponse.status === "success") {
         // setShowModal(true);
+        console.log("cool");
         setIsLoggedIn(true);
-        localStorage.setItem("isLoggedIn", true);
+        setToken(jsonResponse.token);
+        localStorage.setItem("isLoggedIn", "true");
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  useEffect(() => {
-    console.log(isLoggedIn);
-    if (isLoggedIn) location.pathname = "/";
-  }, [isLoggedIn, location.pathname]);
-
   return (
     <motion.div
-      initial={{ x: -1000 }}
+      initial={{ x: "-100vw" }}
       animate={{ x: 0 }}
-      exit={{ x: 1500 }}
+      exit={{ x: "100vw" }}
       className="login auth"
     >
       <form autoComplete="off" className="auth-form" onSubmit={handleSubmit}>
@@ -142,6 +137,8 @@ const Login = ({
           className="auth-form-submit"
         />
       </form>
+      {console.log(isLoggedIn)}
+      {isLoggedIn && <Redirect to="/" />}
     </motion.div>
   );
 };

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import UserDisplay from "./UserDisplay";
 
-const Home = ({ setShowModal }) => {
+const Home = ({ setShowModal, token }) => {
   const [users, setUsers] = useState([
     { id: 123, username: "Anonymous", age: 20, bio: "done telling" },
     { id: 1233, username: "Anonymous", age: 10, bio: "doasdfsding" },
@@ -52,11 +52,25 @@ const Home = ({ setShowModal }) => {
     }, 1500);
   };
 
+  // useEffect(() => {
+  //   async function getUserData() {
+  //     const options = {
+  //       headers: {
+  //         "content-type": "application/json",
+  //         "x-access-token": token,
+  //       },
+  //       method: "POST",
+  //       body: JSON.stringify(),
+  //     };
+  //     const response = await fetch("/api/user");
+  //   }
+  // });
+
   return (
     <motion.div
-      initial={{ x: -1000 }}
+      initial={{ x: "-100vw" }}
       animate={{ x: 0 }}
-      exit={{ x: 1500 }}
+      exit={{ x: "100vw" }}
       className="home"
     >
       <motion.div

@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import "../Landingpage.css";
+import "../styles/landing.css";
 import { Link } from "react-router-dom";
 /* image imports */
 import tennis from "../styles/assets/tennis.png";
@@ -22,9 +22,9 @@ const LandingHome = () => {
   return (
     <>
       <motion.main
-        initial={{ x: -1000 }}
+        initial={{ x: "-100vw" }}
         animate={{ x: 0 }}
-        exit={{ x: 1500 }}
+        exit={{ x: "100vw" }}
         className="main"
       >
         <section className="hero">

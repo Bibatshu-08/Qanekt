@@ -79,18 +79,20 @@ def recommend_hobbists(username, data, combine, transform, sliceIndex):
     
     else:
         user_indices = [i[0] for i in sim_scores]
+        user_id = data['id'].iloc[user_indices]
         user_name = data['username'].iloc[user_indices]
         user_mail = data['email'].iloc[user_indices]
         user_age = data['age'].iloc[user_indices]
         user_interests = data['interests'].iloc[user_indices]
         user_about = data['about'].iloc[user_indices]
 
-        recommendation_data = pd.DataFrame(columns=['Username','Email','Age','Interests','About'])
+        recommendation_data = pd.DataFrame(columns=['ID','Username','Email','Age','Interests','About'])
+        recommendation_data['ID'] = user_id
         recommendation_data['Username'] = user_name
         recommendation_data['Email'] = user_mail
         recommendation_data['Age'] = user_age
-        recommendation_data['Interests'] = user_interests
-        recommendation_data['About'] = user_about
+        recommendation_data['Interests'] = eval(user_interests)
+        recommendation_data['About'] = eval(user_about)
 
         return recommendation_data
 

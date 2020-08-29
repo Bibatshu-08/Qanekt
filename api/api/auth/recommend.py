@@ -91,8 +91,8 @@ def recommend_hobbists(username, data, combine, transform, sliceIndex):
         recommendation_data['Username'] = user_name
         recommendation_data['Email'] = user_mail
         recommendation_data['Age'] = user_age
-        recommendation_data['Interests'] = user_interests
-        recommendation_data['About'] = user_about
+        recommendation_data['Interests'] = eval(user_interests)
+        recommendation_data['About'] = eval(user_about)
 
         return recommendation_data
 

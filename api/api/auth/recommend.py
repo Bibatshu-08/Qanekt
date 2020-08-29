@@ -98,12 +98,12 @@ def recommend_hobbists(username, data, combine, transform, sliceIndex):
 def results(user_id, sliceIndex):
     find_user = get_data()
     combine_result = combine_data(find_user)
-    transform_result = transform_data(combine_result, find_user, sliceIndex)
+    transform_result = transform_data(combine_result, find_user)
     
     if user_id not in find_user['username'].unique():
         return 'User not in Database'
     
     else:
-        recommendations = recommend_hobbists(user_id, find_user, combine_result, transform_result)
+        recommendations = recommend_hobbists(user_id, find_user, combine_result, transform_result,sliceIndex)
         return recommendations.to_dict('records')
 

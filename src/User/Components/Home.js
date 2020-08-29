@@ -77,12 +77,13 @@ const Home = ({ setShowModal, token }) => {
   };
 
   useEffect(() => {
+    const authToken = localStorage.getItem("token");
     async function getUserConnections() {
       try {
         const options = {
           headers: {
             "content-type": "application/json",
-            "x-access-token": token,
+            "x-access-token": authToken,
           },
         };
         console.log(options);
@@ -99,7 +100,7 @@ const Home = ({ setShowModal, token }) => {
         const options = {
           headers: {
             "content-type": "application/json",
-            "x-access-token": token,
+            "x-access-token": authToken,
           },
         };
         console.log(options);

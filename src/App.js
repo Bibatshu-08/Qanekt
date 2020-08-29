@@ -39,11 +39,11 @@ function App() {
     // localStorage.setItem(isLoggedIn, false);
     // localStorage.clear();
     const temp = JSON.parse(localStorage.getItem("isLoggedIn"));
-    const authToken = JSON.parse(localStorage.getItem("isLoggedIn"));
+    const authToken = localStorage.getItem("token");
+    console.log(authToken);
     setToken(authToken);
     console.log(temp);
     if (temp) {
-      console.log("firebase");
       setIsLoggedIn(true);
     }
   }, []);

@@ -47,9 +47,9 @@ const Login = ({
         }, 4000);
       } else if (jsonResponse.status === "success") {
         // setShowModal(true);
-        console.log("cool");
         setIsLoggedIn(true);
         setToken(jsonResponse.token);
+        localStorage.setItem("token", jsonResponse.token);
         localStorage.setItem("isLoggedIn", "true");
       }
     } catch (error) {

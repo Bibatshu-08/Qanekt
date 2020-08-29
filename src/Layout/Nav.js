@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import logo from '../styles/assets/logo.png'
 
 const Nav = ({ setIsLoggedIn, isLoggedIn }) => {
   const handleLogOut = (e) => {
@@ -13,8 +14,9 @@ const Nav = ({ setIsLoggedIn, isLoggedIn }) => {
       <nav className="nav">
         <div className="logo-container">
           <Link to="/">
-            <li className="logo">Logo</li>
+            <img src={logo} alt="Qanekt" className="logo" />
           </Link>
+          <h3>Quanekt</h3>
         </div>
         <div className="nav-links">
           {isLoggedIn ? (

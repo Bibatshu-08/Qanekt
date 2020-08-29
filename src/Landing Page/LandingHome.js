@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import "../styles/landing.css";
 import { Link } from "react-router-dom";
 /* image imports */
-import tennis from "../styles/assets/tennis.png";
+import connect from "../styles/assets/connect.png";
 import singer from "../styles/assets/singer.png";
 import photography from "../styles/assets/photography.png";
 import artist from "../styles/assets/artist.png";
@@ -45,7 +45,7 @@ const LandingHome = () => {
             </h4>
           </div>
           <div className="hero-image-wrapper">
-            <img className="hero-image" src={tennis} alt="tennis player" />
+            <img className="hero-image" src={connect} alt="tennis player" />
           </div>
         </section>
 
@@ -86,10 +86,16 @@ const LandingHome = () => {
             <li>Logo</li>
           </div>
           <div className="social-links">
-            <li className="social-link"></li>
+            <h1 className="social-links-title">Social Links</h1>
+            <li className="social-link">Facebook</li>
+            <li className="social-link">Twitter</li>
+            <li className="social-link">Instagram</li>
           </div>
           <div className="website-links">
-            <li className="website-link"></li>
+            <h1 className="website-link-title">Website Links</h1>
+            <li className="website-link">Facebook</li>
+            <li className="website-link">Twitter</li>
+            <li className="website-link">Instagram</li>
           </div>
         </footer>
       </motion.main>

@@ -21,7 +21,7 @@ const Home = ({ setShowModal, token }) => {
     {
       id: 3,
       username: "Anonymous",
-      interests: ["sports", "art"],
+      interests: ["sports", "art", "sports", "art", "sports", "art"],
       age: 20,
       bio: "donawfe tawefwefelling",
     },
@@ -41,11 +41,11 @@ const Home = ({ setShowModal, token }) => {
     },
   ]);
   const [xOffset, setXOffset] = useState(Math.random() + 1);
-  const [yOffset, setYOffset] = useState(0);
+  const [page, setPage] = useState(1);
 
-  const handleMoreUsers = () => {
+  const handleNextPage = () => {
     setShowModal(true);
-
+    page++;
     setUsers([]);
     setTimeout(() => {
       setUsers([
@@ -76,19 +76,49 @@ const Home = ({ setShowModal, token }) => {
     }, 1500);
   };
 
-  // useEffect(() => {
-  //   async function getUserData() {
-  //     const options = {
-  //       headers: {
-  //         "content-type": "application/json",
-  //         "x-access-token": token,
-  //       },
-  //       method: "POST",
-  //       body: JSON.stringify(),
-  //     };
-  //     const response = await fetch("/api/user");
-  //   }
-  // });
+  useEffect(() => {
+    const authToken = localStorage.getItem("token");
+    async function getUserConnections() {
+      try {
+        const options = {
+          headers: {
+            "content-type": "application/json",
+          },
+        };
+
+        if (authToken) options.headers["x-access-token"] = authToken;
+
+        console.log(options);
+        const response = await fetch("/api/connections", options);
+        console.log(response);
+        const jsonResponse = await response.json();
+        console.log(jsonResponse);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    async function getUserData() {
+      try {
+        const options = {
+          headers: {
+            "content-type": "application/json",
+          },
+        };
+
+        if (authToken) options.headers["x-access-token"] = authToken;
+
+        console.log(options);
+        const response = await fetch("/api/connections", options);
+        console.log(response);
+        const jsonResponse = await response.json();
+        console.log(jsonResponse);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getUserData();
+    getUserConnections();
+  });
 
   return (
     <motion.div
@@ -113,7 +143,6 @@ const Home = ({ setShowModal, token }) => {
         {users.map((user, index) => (
           <UserDisplay
             xOffset={xOffset}
-            yOffset={yOffset}
             key={user.id}
             user={user}
             index={index}
@@ -122,8 +151,17 @@ const Home = ({ setShowModal, token }) => {
       </motion.div>
       {/* </AnimateSharedLayout> */}
 
-      <button className="i-want-more" onClick={handleMoreUsers}>
-        MORE
+      <button className="previous" onClick={handleNextPage}>
+        <span role="img" aria-label="previous">
+          👈
+        </span>
+        Previous
+      </button>
+      <button className="next" onClick={handleNextPage}>
+        Next
+        <span role="img" aria-label="previous">
+          👉
+        </span>
       </button>
     </motion.div>
   );

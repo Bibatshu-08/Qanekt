@@ -60,7 +60,7 @@ def transform_data(data_combine, data_plot):
 
 
 
-def recommend_hobbists(username, data, combine, transform):
+def recommend_hobbists(username, data, combine, transform, sliceIndex):
 
     def longi(a):   return data['longitude'].iloc[a]
     def lati(a):    return data['latitude'].iloc[a]
@@ -72,27 +72,32 @@ def recommend_hobbists(username, data, combine, transform):
     sim_scores = list(enumerate(transform[index]))
     sim_scores = sorted(sim_scores, key=lambda x: x[1] , reverse=True)
     # sim_scores = sorted(sim_scores, key=lambda x: x[1] * max( (6371 - seperation(index,x[0]) ) ,0 ) , reverse=True)
-    sim_scores = sim_scores[1:21]
+    sim_scores = sim_scores[sliceIndex*5:sliceIndex*5+5]
+
+    if len(sim_scores)==0:
+        return "No other users found"
     
-    user_indices = [i[0] for i in sim_scores]
-    user_name = data['username'].iloc[user_indices]
-    user_mail = data['email'].iloc[user_indices]
-    user_age = data['age'].iloc[user_indices]
-    user_interests = data['interests'].iloc[user_indices]
-    user_about = data['about'].iloc[user_indices]
+    else:
+        user_indices = [i[0] for i in sim_scores]
+        user_id = data['id'].iloc[user_indices]
+        user_name = data['username'].iloc[user_indices]
+        user_mail = data['email'].iloc[user_indices]
+        user_age = data['age'].iloc[user_indices]
+        user_interests = data['interests'].iloc[user_indices]
+        user_about = data['about'].iloc[user_indices]
 
-    recommendation_data = pd.DataFrame(columns=['Username','Email','Age','Interests','About'])
-    recommendation_data['Username'] = user_name
-    recommendation_data['Email'] = user_mail
-    recommendation_data['Age'] = user_age
-    recommendation_data['Interests'] = user_interests
-    recommendation_data['About'] = user_about
+        recommendation_data = pd.DataFrame(columns=['ID','Username','Email','Age','Interests','About'])
+        recommendation_data['ID'] = user_id
+        recommendation_data['Username'] = user_name
+        recommendation_data['Email'] = user_mail
+        recommendation_data['Age'] = user_age
+        recommendation_data['Interests'] = eval(user_interests)
+        recommendation_data['About'] = eval(user_about)
 
-    return recommendation_data
+        return recommendation_data
 
 
-def results(user_id):
-    
+def results(user_id, sliceIndex):
     find_user = get_data()
     combine_result = combine_data(find_user)
     transform_result = transform_data(combine_result, find_user)
@@ -101,6 +106,6 @@ def results(user_id):
         return 'User not in Database'
     
     else:
-        recommendations = recommend_hobbists(user_id, find_user, combine_result, transform_result)
+        recommendations = recommend_hobbists(user_id, find_user, combine_result, transform_result,sliceIndex)
         return recommendations.to_dict('records')
 

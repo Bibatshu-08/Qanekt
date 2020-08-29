@@ -4,38 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 const UserDisplay = ({ user, index, xOffset, yOffset }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const offsetVariants = {
-    initial: {
-      // y: 0,
-      borderRadius: "50%",
-    },
-    animate1: {
-      x: xOffset,
-      // y: yOffset,
-    },
-    animate: {
-      borderRadius: isOpen ? "10px" : "50%",
-      width: isOpen ? "400px" : "200px",
-      height: "200px",
-    },
-    animate2: {
-      x: xOffset * Math.random() - 0.5 * 250,
-      // y: yOffset * Math.random() * 100,
-    },
-    animate3: {
-      x: xOffset * Math.random() - 0.5 * 250,
-      // y: yOffset * Math.random() * 100,
-    },
-    animate4: {
-      x: xOffset * Math.random() - 0.5 * 100,
-      // y: yOffset * Math.random() * 100,
-    },
-    animate5: {
-      x: xOffset * Math.random() - 0.5 * 100,
-      // y: yOffset * Math.random() * 100,
-    },
-  };
-
   const handleUserOpen = () => {
     setIsOpen(!isOpen);
   };
@@ -44,9 +12,6 @@ const UserDisplay = ({ user, index, xOffset, yOffset }) => {
     <motion.div
       onClick={handleUserOpen}
       key={user.id}
-      // variants={offsetVariants}
-      // initial="initial"
-      // animate="animate"
       initial={{ borderRadius: "50%", x: xOffset }}
       animate={{
         borderRadius: isOpen ? "10px" : "50%",

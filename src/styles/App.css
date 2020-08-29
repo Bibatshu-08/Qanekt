@@ -98,6 +98,7 @@ button {
 /*** User styles ***/
 
 .user {
+  margin: 10px;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -126,7 +127,8 @@ button {
   grid-area: 3 / 6 / 5 / 9;
 }
 .user-4 {
-  grid-area: 2 / 2 / 4 / 3;
+  justify-self: flex-end;
+  grid-area: 2 / 1 / 4 / 3;
 }
 .user-5 {
   grid-area: 3 / 3 / 5 / 4;
@@ -144,17 +146,35 @@ button {
   padding: 3px 15px;
   font-size: 12px;
   margin-top: 8px;
-  margin-left: 4px;
+  margin-right: 8px;
   background-color: #a03e4b;
   color: white;
 }
 
-.i-want-more {
-  grid-area: 5 / 7 / 6 / 8;
+.next,
+.previous {
+  grid-area: 5 / 7 / 6 / 9;
   border-radius: 10px;
-  height: 40px;
-  width: 80px;
+  background-color: transparent;
+  font-size: 20px;
+  font-family: "Nunito", sans-serif;
+  font-weight: bold;
   border: none;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px 30px;
+  transition: all 300ms ease;
+}
+
+.next:hover,
+.previous:hover {
+  background-color: #a03e4b;
+  color: white;
+}
+
+.previous {
+  grid-area: 5 / 1 / 6 / 3;
 }
 
 /*** modal styles ***/

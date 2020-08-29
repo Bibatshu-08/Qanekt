@@ -143,7 +143,6 @@ def getallusers():
 
 @auth.route('/resetDatabase')
 def reset_database():
-
     db.drop_all()
     db.create_all()
     return "Database has been reset"
@@ -152,19 +151,18 @@ def reset_database():
 @auth.route('/recommend', methods=['GET'])
 @token_required
 def recommend_user(current_user):
-    res = recommend.results(current_user.username)
+    sliceIndex = request.args.get('page', 1, type=int)
+    res = recommend.results(current_user.username, sliceIndex-1)
     return jsonify(res)
 
 
-@auth.route('/clearDatabase')
+@auth.route('/clearDatabase')\
 def clear_database():
     try:
         for user in User.query.all():
             db.session.delete(user)
             db.session.commit()
-
         return "All userdata have been removed"
-
     except:
         return "Database is already empty"
 
@@ -203,7 +201,7 @@ def connections(current_user):
     
     page = request.args.get('page', 1, type=int)
     pagination = current_user.followed.paginate(
-        page, per_page=2, error_out=False)
+        page, per_page=5, error_out=False)
     follows = [item.followed for item in pagination.items]
     return jsonify([{
         'username': user.username,

@@ -4,16 +4,41 @@ import UserDisplay from "./UserDisplay";
 
 const Home = ({ setShowModal, token }) => {
   const [users, setUsers] = useState([
-    { id: 123, username: "Anonymous", age: 20, bio: "done telling" },
-    { id: 1233, username: "Anonymous", age: 10, bio: "doasdfsding" },
-    { id: 1235, username: "Anonymous", age: 20, bio: "donawfe tawefwefelling" },
     {
-      id: 1263,
+      id: 1,
       username: "Anonymous",
-      age: 50,
+      interests: ["sports", "music"],
+      age: 20,
+      bio: "done telling",
+    },
+    {
+      id: 2,
+      username: "Anonymous",
+      interests: ["sports", "science"],
+      age: 10,
+      bio: "doasdfsding",
+    },
+    {
+      id: 3,
+      username: "Anonymous",
+      interests: ["sports", "art"],
+      age: 20,
+      bio: "donawfe tawefwefelling",
+    },
+    {
+      id: 4,
+      username: "Anonymous",
+      age: 52,
+      interests: ["sports", "science"],
       bio: "done tawdfwafeadfawfing",
     },
-    { id: 123645, username: "Anonymous", age: 23, bio: "doawfwefne telling" },
+    {
+      id: 5,
+      username: "Anonymous",
+      interests: ["sports", "science"],
+      age: 23,
+      bio: "doawfwefne telling",
+    },
   ]);
   const [xOffset, setXOffset] = useState(Math.random() + 1);
   const [yOffset, setYOffset] = useState(0);
@@ -22,7 +47,6 @@ const Home = ({ setShowModal, token }) => {
     setShowModal(true);
 
     setUsers([]);
-    console.log("hello");
     setTimeout(() => {
       setUsers([
         { id: 123, username: "Anonymous", age: 200, bio: "done telling" },

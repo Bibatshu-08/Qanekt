@@ -24,7 +24,7 @@ import LandingHome from "./Landing Page/LandingHome";
 /* User imports */
 import Home from "./User/Components/Home";
 import Profile from "./User/Components/Profile";
-import Location from "./User/Components/Location";
+// import Location from "./User/Components/Location";
 
 function App() {
   /* state variables */
@@ -77,7 +77,7 @@ function App() {
 
                     <Route path="/about" render={(props) => <About />} />
                     <Route path="/profile" render={(props) => <Profile />} />
-                    <Route path="/location" render={(props) => <Location />} />
+                    {/* <Route path="/location" render={(props) => <Location />} /> */}
 
                     <Redirect to="/" />
                   </Switch>

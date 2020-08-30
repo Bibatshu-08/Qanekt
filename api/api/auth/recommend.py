@@ -12,9 +12,10 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 
-
 def get_data():
     users = User.query.all()
+    empty_handler = lambda variable: [] if variable == None else variable.split()
+
     df = [{
         'id': user.id,
         'username': user.username,
@@ -22,7 +23,7 @@ def get_data():
         'password': user.password,
         'age': user.age,
         'gender': user.gender,
-        'about': str(list(map(str, user.about.split()))),
+        'about': str(list(map(str, empty_handler(user.about)))),
         'interests': str(list(map(str, user.list_interests()))),
         'location': user.location,
     }for user in users]
@@ -82,8 +83,12 @@ def recommend_hobbists(username, data, combine, transform, sliceIndex):
         user_name = data['username'].iloc[user_indices]
         user_mail = data['email'].iloc[user_indices]
         user_age = data['age'].iloc[user_indices]
-        user_interests = data['interests'].iloc[user_indices]
-        user_about = data['about'].iloc[user_indices]
+
+        data_interests = pd.DataFrame.from_dict(pd.json_normalize([{'interests':eval(x)} for x in data['interests'].iloc[user_indices]]), orient='columns')
+        user_interests = data_interests['interests']
+
+        data_about = pd.DataFrame.from_dict(pd.json_normalize([{'about':eval(x)} for x in data['about'].iloc[user_indices]]), orient='columns')
+        user_about = data_about['about']
 
         recommendation_data = pd.DataFrame(columns=['ID','Username','Email','Age','Interests','About'])
         recommendation_data['ID'] = user_id
@@ -94,6 +99,7 @@ def recommend_hobbists(username, data, combine, transform, sliceIndex):
         recommendation_data['About'] = user_about
 
         return recommendation_data
+
 
 
 def results(user_id, sliceIndex):
